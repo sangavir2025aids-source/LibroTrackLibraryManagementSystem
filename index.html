@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LibroTrack - Library Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <h1>📚 LibroTrack Library Management System</h1>
+
+
+    <!-- ================= NAVIGATION BAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="#dashboard">Dashboard</a>
+
+        <a href="#books">Books</a>
+
+        <a href="#students">Students</a>
+
+        <a href="#issue">Issue / Return</a>
+
+        <a href="#records">Records</a>
+
+    </nav>
+
+
+    <div class="container">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <h2 id="dashboard">Dashboard</h2>
+
+        <div class="dashboard">
+
+
+            <div class="card">
+
+                <h3>📚 Total Books</h3>
+
+                <p id="totalBooks">0</p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>📖 Available Copies</h3>
+
+                <p id="availableCopies">0</p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>👨‍🎓 Students</h3>
+
+                <p id="totalStudents">0</p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🔄 Issued Books</h3>
+
+                <p id="issuedBooks">0</p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= BOOKS ================= -->
+
+        <h2 id="books">Books Management</h2>
+
+        <button onclick="loadBooks()">
+            View All Books
+        </button>
+
+
+        <!-- ================= ADD BOOK ================= -->
+
+        <h3>Add Book</h3>
+
+        <input
+            type="text"
+            id="title"
+            placeholder="Title">
+
+        <input
+            type="text"
+            id="author"
+            placeholder="Author">
+
+        <input
+            type="text"
+            id="isbn"
+            placeholder="ISBN">
+
+        <input
+            type="text"
+            id="category"
+            placeholder="Category">
+
+        <input
+            type="number"
+            id="totalCopies"
+            placeholder="Total Copies">
+
+        <button onclick="addBook()">
+            Add Book
+        </button>
+
+
+
+        <!-- ================= UPDATE BOOK ================= -->
+
+        <h3>Update Book</h3>
+
+        <input
+            type="number"
+            id="updateId"
+            placeholder="Book ID">
+
+        <input
+            type="text"
+            id="updateTitle"
+            placeholder="Title">
+
+        <input
+            type="text"
+            id="updateAuthor"
+            placeholder="Author">
+
+        <input
+            type="text"
+            id="updateIsbn"
+            placeholder="ISBN">
+
+        <input
+            type="text"
+            id="updateCategory"
+            placeholder="Category">
+
+        <input
+            type="number"
+            id="updateTotalCopies"
+            placeholder="Total Copies">
+
+        <button onclick="updateBook()">
+            Update Book
+        </button>
+
+
+
+        <!-- ================= SEARCH BOOK ================= -->
+
+        <h3>Search Books</h3>
+
+        <input
+            type="text"
+            id="searchBook"
+            placeholder="Enter title, author or category">
+
+        <button onclick="searchBooks('title')">
+            Search by Title
+        </button>
+
+        <button onclick="searchBooks('author')">
+            Search by Author
+        </button>
+
+        <button onclick="searchBooks('category')">
+            Search by Category
+        </button>
+
+        <button onclick="loadBooks()">
+            Show All Books
+        </button>
+
+
+
+        <!-- ================= BOOK TABLE ================= -->
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Title</th>
+
+                    <th>Author</th>
+
+                    <th>ISBN</th>
+
+                    <th>Category</th>
+
+                    <th>Total Copies</th>
+
+                    <th>Available Copies</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="bookTableBody">
+
+            </tbody>
+
+        </table>
+
+
+
+        <!-- ================= STUDENTS ================= -->
+
+        <h2 id="students">Student Management</h2>
+
+        <button onclick="loadStudents()">
+            View All Students
+        </button>
+
+
+        <!-- ================= ADD STUDENT ================= -->
+
+        <h3>Add Student</h3>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Student Name">
+
+        <input
+            type="text"
+            id="studentEmail"
+            placeholder="Student Email">
+
+        <button onclick="addStudent()">
+            Add Student
+        </button>
+
+
+
+        <!-- ================= UPDATE STUDENT ================= -->
+
+        <h3>Update Student</h3>
+
+        <input
+            type="number"
+            id="updateStudentId"
+            placeholder="Student ID">
+
+        <input
+            type="text"
+            id="updateStudentName"
+            placeholder="Student Name">
+
+        <input
+            type="text"
+            id="updateStudentEmail"
+            placeholder="Student Email">
+
+        <button onclick="updateStudent()">
+            Update Student
+        </button>
+
+
+
+        <!-- ================= STUDENT TABLE ================= -->
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="studentTableBody">
+
+            </tbody>
+
+        </table>
+
+
+
+        <!-- ================= ISSUE / RETURN ================= -->
+
+        <h2 id="issue">Issue / Return</h2>
+
+
+        <!-- ================= ISSUE BOOK ================= -->
+
+        <h3>Issue a Book</h3>
+
+        <input
+            type="number"
+            id="issueBookId"
+            placeholder="Book ID">
+
+        <input
+            type="number"
+            id="issueStudentId"
+            placeholder="Student ID">
+
+        <button onclick="issueBook()">
+            Issue Book
+        </button>
+
+
+
+        <!-- ================= RETURN BOOK ================= -->
+
+        <h3>Return a Book</h3>
+
+        <input
+            type="number"
+            id="returnIssueId"
+            placeholder="Issue Record ID">
+
+        <input
+            type="date"
+            id="returnDate">
+
+        <button onclick="returnBook()">
+            Return Book
+        </button>
+
+
+
+        <!-- ================= ISSUE RECORDS ================= -->
+
+        <h2 id="records">Issue Records</h2>
+
+        <button onclick="loadIssueRecords()">
+            View Issue Records
+        </button>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Book ID</th>
+
+                    <th>Student ID</th>
+
+                    <th>Issue Date</th>
+
+                    <th>Due Date</th>
+
+                    <th>Return Date</th>
+
+                    <th>Fine</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="issueTableBody">
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
